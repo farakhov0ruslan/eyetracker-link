@@ -9,23 +9,34 @@ public class TobiiHelper : MonoBehaviour
     public static GazePoint lastGazePoint;
     public static Vector2 getWorldPoint()
     {
-        GazePoint gp = TobiiAPI.GetGazePoint();
-        if (gp.IsValid)
+        if (TobiiAPI.IsConnected)
         {
-            lastGazePoint = gp;
-            return Camera.main.ScreenToWorldPoint(gp.Screen);
+            GazePoint gp = TobiiAPI.GetGazePoint();
+            if (gp.IsValid)
+            {
+                lastGazePoint = gp;
+                return Camera.main.ScreenToWorldPoint(gp.Screen);
+            }
+            else return Camera.main.ScreenToWorldPoint(lastGazePoint.Screen);
         }
-        else return Camera.main.ScreenToWorldPoint(lastGazePoint.Screen);
+        else
+            return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
     public static Vector2 getViewportPoint()
+
     {
-        GazePoint gp = TobiiAPI.GetGazePoint();
-        if (gp.IsValid)
+        if (TobiiAPI.IsConnected)
         {
-            lastGazePoint = gp;
-            return Camera.main.ScreenToViewportPoint(gp.Screen);
+            GazePoint gp = TobiiAPI.GetGazePoint();
+            if (gp.IsValid)
+            {
+                lastGazePoint = gp;
+                return Camera.main.ScreenToViewportPoint(gp.Screen);
+            }
+            else return Camera.main.ScreenToViewportPoint(lastGazePoint.Screen);
         }
-        else return Camera.main.ScreenToViewportPoint(lastGazePoint.Screen);
+        else
+            return Camera.main.ScreenToViewportPoint(Input.mousePosition);
     }
 
     // Start is called before the first frame update
