@@ -6,8 +6,8 @@ using UnityEngine;
 //this is a class that provides easy use for Tobii tracker
 public class TobiiHelper : MonoBehaviour
 {
-    GazePoint lastGazePoint;
-    Vector2 getWorldPoint()
+    public static GazePoint lastGazePoint;
+    public static Vector2 getWorldPoint()
     {
         GazePoint gp = TobiiAPI.GetGazePoint();
         if (gp.IsValid)
@@ -17,7 +17,7 @@ public class TobiiHelper : MonoBehaviour
         }
         else return Camera.main.ScreenToWorldPoint(lastGazePoint.Screen);
     }
-    Vector2 getViewportPoint()
+    public static Vector2 getViewportPoint()
     {
         GazePoint gp = TobiiAPI.GetGazePoint();
         if (gp.IsValid)
