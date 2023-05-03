@@ -251,8 +251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce41dd964bb682249870ceb1651e47f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  empty: {fileID: 0}
-  wall: {fileID: 0}
-  box: {fileID: 0}
-  goal: {fileID: 0}
-  mover: {fileID: 0}
+  empty: {fileID: 584636863564187778, guid: 948189d2805854f4c89ba84d3885f1b6, type: 3}
+  wall: {fileID: 3237180987901656296, guid: ca84b59ae47c536418f16b93b61bb4d3, type: 3}
+  box: {fileID: 4413879652220065602, guid: aa85f9e876b68ce4caa3a80f5d9cb466, type: 3}
+  goal: {fileID: 7296982984873130960, guid: ee32ab36ee8763945ba89a59878c536b, type: 3}
+  mover: {fileID: 2701050070164351532, guid: d8f04d9bace155044968efb8ddf14cc2, type: 3}

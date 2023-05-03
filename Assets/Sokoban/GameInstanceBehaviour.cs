@@ -1,85 +1,162 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameInstanceBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int height;
-    private int width;
-    private GameObject[,] field;
+    public static int height;
+    public static int width;
+    public static float scale;
+    public static GameObject[,] field;
+    public static GameObject[,] movables;
     private GameObject player;
-    private int playerX, playerY;
 
-    [SerializeField] GameObject empty;
-    [SerializeField] GameObject wall;
-    [SerializeField] GameObject box;
-    [SerializeField] GameObject goal;
-    [SerializeField] GameObject mover;
+    private TextAsset[] levels;
+    int lvl_num;
+
+    [SerializeField] public GameObject empty;
+    [SerializeField] public GameObject wall;
+    [SerializeField] public GameObject box;
+    [SerializeField] public GameObject goal;
+    [SerializeField] public GameObject mover;
 
     void Start()
     {
-        parseLevel("level1.lvl");
+        lvl_num = 0;
+        levels = Resources.LoadAll<TextAsset>("Sokoban");
+        nextLevel();
     }
 
-    private void parseLevel(string file)
+    private void parseLevel(TextAsset file)
     {
         //width height
-        //in matrix 0 is empty space, 1 is wall, 2 is box, 3 is goal, 4 is mover
-        string[] lines = File.ReadAllLines(file);
+        //in matrix 0 is empty space, 1 is wall, 2 is box, 3 is goal, 4 is player
+        string[] lines = file.text.Split('\n');
         string[] s = lines[0].Split(' ');
         height = int.Parse(s[0]);
         width = int.Parse(s[1]);
-        field = new GameObject[height, width];
-        for (int i = 0; i < height; i++)
+        field = new GameObject[width, height];
+        movables = new GameObject[width, height];
+
+        Vector2 bot_left = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+        Vector2 top_right = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+        Vector2 middle = Camera.main.ViewportToWorldPoint(new Vector2(0.5f, 0.5f));
+        Vector2 startPos;
+        if ((top_right.y - bot_left.y) / height <=  (top_right.x - bot_left.x) / width)
+        {
+            scale = (top_right.y - bot_left.y) / height;
+            startPos = new Vector2(middle.x - scale * width / 2, bot_left.y);
+        }
+        else
+        {
+            scale = (top_right.x - bot_left.x) / width;
+            startPos = new Vector2(bot_left.x, middle.y - scale * height / 2);
+        }
+         
+
+        for (int i = 0; i< width; i++)
         {
             s = lines[i + 1].Split();
-            for (int j = 0; j < width; j++)
+            int y = height - i - 1;
+            for (int x = 0; x < width; x++)
             {
-                if (s[0] == "0")
+                if (s[x] == "0")
                 {
-                    field[i, j] = Instantiate(empty);
+                    field[x, y] = Instantiate(empty);
+                    field[x, y].transform.position = startPos + new Vector2(x + 0.5f, y + 0.5f) * scale;
+                    
                 }
-                else if (s[0] == "1")
+                else if (s[x] == "1")
                 {
-                    field[i, j] = Instantiate(wall);
+                    field[x, y] = Instantiate(wall);
+                    field[x, y].transform.position = startPos + new Vector2(x + 0.5f, y + 0.5f) * scale;
                 }
-                else if (s[0] == "2")
+                else if (s[x] == "2")
                 {
-                    field[i, j] = Instantiate(box);
+                    field[x, y] = Instantiate(empty);
+                    field[x, y].transform.position = startPos + new Vector2(x + 0.5f, y + 0.5f) * scale;
+                    movables[x, y] = Instantiate(box);
+                    movables[x, y].transform.position = startPos + new Vector2(x + 0.5f, y + 0.5f) * scale;
+                    movables[x, y].GetComponent<Movable>().setPos(x, y);
                 }
-                else if (s[0] == "3")
+                else if (s[x] == "3")
                 {
-                    field[i, j] = Instantiate(goal);
+                    field[x, y] = Instantiate(goal);
+                    field[x, y].transform.position = startPos + new Vector2(x + 0.5f, y + 0.5f) * scale;
                 }
-                else if (s[0] == "4")
+                else if (s[x] == "4")
                 {
-                    field[i, j] = Instantiate(mover);
-                    player = mover;
-                    playerX = j;
-                    playerY = i;
+                    field[x, y] = Instantiate(empty);
+                    field[x, y].transform.position = startPos + new Vector2(x + 0.5f, y + 0.5f) * scale;
+                    player = Instantiate(mover);
+                    movables[x, y] = player;
+                    movables[x, y].transform.position = startPos + new Vector2(x + 0.5f, y + 0.5f) * scale;
+                    player.GetComponent<Movable>().setPos(x, y);
                 }
             }
         }
     }
 
-    //0 is for left, 1 is for up, 2 is for right, 3 is for down
-    private void move(int dir)
+    void nextLevel()
     {
+        if (lvl_num != 0)
+            destroyAll();
+        if (lvl_num < levels.Length)
+        {
+            parseLevel(levels[lvl_num]);
+        }
+        else
+        {
+            Debug.Log("Quit");
+            Application.Quit();
+        }
+        lvl_num++;
+    }
 
+    void destroyAll()
+    {
+        foreach (GameObject i in movables)
+        {
+            if (i != null)
+                Destroy(i);
+        }
+        foreach(GameObject i in field)
+        {
+            Destroy(i);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown("a"))
-            move(0);
+            player.GetComponent<Movable>().move(-1, 0);
         else if (Input.GetKeyDown("w"))
-            move(1);
+            player.GetComponent<Movable>().move(0, 1);
         else if (Input.GetKeyDown("d"))
-            move(2);
+            player.GetComponent<Movable>().move(1, 0);
         else if (Input.GetKeyDown("s"))
-            move(3);
+            player.GetComponent<Movable>().move(0, -1);
+
+        bool flag = true;
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (field[x, y].CompareTag("Goal"))
+                {
+                    if (movables[x, y] == null)
+                        flag = false;
+                }
+            }
+        }
+        if (flag)
+        {
+            nextLevel();
+        }
     }
 }
