@@ -10,6 +10,8 @@ public class TobiiButtonBehaviour : MonoBehaviour
     private Canvas cv;
     private float timeOnFocus = 0;
     [SerializeField] float focusTime;
+    [SerializeField] GameObject tobiiCursor;
+    private bool animating = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +32,29 @@ public class TobiiButtonBehaviour : MonoBehaviour
         //Vector3 wp = TobiiHelper.getWorldPoint();
         if (wp.y >= bot_left.y && wp.y <= top_right.y && wp.x >= bot_left.x && wp.x <= top_right.x)
         {
+            if (timeOnFocus == 0)
+            {
+                animating = true;
+                tobiiCursor.GetComponent<TobiiCursorBehaviour>().animateCursor(focusTime);
+            }
+
             timeOnFocus += Time.deltaTime;
         }
-        else timeOnFocus = 0;
+        else
+        {
+            timeOnFocus = 0;
+            if (animating)
+            {
+                tobiiCursor.GetComponent<TobiiCursorBehaviour>().stopAnimateCursor();
+                animating = false;
+            }
+        }
 
         if (timeOnFocus >= focusTime)
         {
+            animating = false;
+            tobiiCursor.GetComponent<TobiiCursorBehaviour>().stopAnimateCursor();
+            Debug.Log("Button pressed");
             bt.onClick.Invoke();
             timeOnFocus = 0;
         }

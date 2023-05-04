@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class TobiiCursorBehaviour : MonoBehaviour
 {
     [SerializeField] float mass;
     private static Vector3 wp;
+    [SerializeField] float scaleAnim;
+
 
     public static Vector3 world_point
     {
@@ -15,6 +18,27 @@ public class TobiiCursorBehaviour : MonoBehaviour
     void Start()
     {
         transform.position = Vector2.zero;
+    }
+
+    public void animateCursor(float time)
+    {
+        float speed = 1 / time;
+        Animator animator = GetComponentInParent<Animator>();
+        if (animator.gameObject.activeSelf)
+        {
+            Debug.Log("Started cursor animation");
+            animator.SetBool("Focusing", true);
+            animator.SetFloat("Speed", speed);
+        }
+    }
+    public void stopAnimateCursor()
+    {
+        Animator animator = GetComponentInParent<Animator>();
+        if (animator.gameObject.activeSelf)
+        {
+            Debug.Log("Stopped cursor animation");
+            animator.SetBool("Focusing", false);
+        }
     }
 
     // Update is called once per frame
