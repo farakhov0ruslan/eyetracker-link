@@ -156,7 +156,7 @@ MonoBehaviour:
   FoodCluser: {fileID: 2067699349037374681, guid: 3c05a070284b4024586e55370b2406b1, type: 3}
   Enemy: {fileID: 3249486585451792174, guid: 52452c59af687de4697f629aea52f271, type: 3}
   Player: {fileID: 602100893}
-  percent: 40
+  percent: 80
   ticks: 0
 --- !u!4 &170224803
 Transform:
@@ -178,6 +178,75 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5868160314326377616, guid: d9ba029d98b334d40862529f53a69d37, type: 3}
   m_PrefabInstance: {fileID: 5868160314915467277}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1162202950
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522724, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232386003522725, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_Name
+      value: TobiiCursorWA
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232387864589005, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.81221074
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232387864589005, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8166255
+      objectReference: {fileID: 0}
+    - target: {fileID: 170232387864589005, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8490566
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6ffed79fe674a6a4ab00cf449af7e33c, type: 3}
 --- !u!1 &1951435046
 GameObject:
   m_ObjectHideFlags: 0

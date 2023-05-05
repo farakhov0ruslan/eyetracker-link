@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
     public GameObject FoodCluser;
     public GameObject Enemy;
     public GameObject Player;
-    public float percent = 60f;
+    public float percent = 80f;
     public float ticks = 0;
     void Start()
     {
@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
             float x = camera_size / ratio;
             float y = camera_size;
             GameObject obj;
-            int generation = (int)(Random.Range(10, 15) * (2.1 - percent * 3.4f / 100));
+            int generation = (int)(Random.Range(10, 15) * (3.5 - percent * 3.4f / 100));
             // Сверху
             for (int i=0; i<=generation; ++i)
             {

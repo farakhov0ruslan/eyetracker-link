@@ -96,12 +96,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5868160314326377616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e1b433ba72691419d5ebb97d8ef029, type: 3}
+  m_Script: {fileID: 11500000, guid: 37a8a7aecac84f94684b56efc22089ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   collectedFood: 0
   Armor: {fileID: 7660499527387374119, guid: d1714a5bc4d31884c896fec62bb68986, type: 3}
-  bst: 9
+  Walking: {fileID: 1611387441350786127, guid: 9010b6b5f575f9547aa3c042cee0a69b, type: 3}
+  Text: {fileID: 8783622401949188583, guid: 1cc50b107adacbb4ea8288a1d5c25c9a, type: 3}
+  score: 0
+  bst: 2
 --- !u!61 &5868160314326377644
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class EnemyLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speedBonus += 0.06f * Time.deltaTime;
+        speedBonus += 0.02f * Time.deltaTime;
         float spd = (speedBonus + speedStart) * Time.deltaTime;
         Vector3 tmp = Vector2.MoveTowards(transform.position, target.transform.position, spd);
         tmp.z = 0;

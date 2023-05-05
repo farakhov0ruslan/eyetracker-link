@@ -14,6 +14,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject Text;
     public long score = 0;
     public float bst = 2;
+    public float speed = 3.5f;
     private GameObject particleThing;
     private float invulnarability=0;
     private List<GameObject> ArmorPieces = new List<GameObject>();
@@ -34,26 +35,10 @@ public class NewBehaviourScript : MonoBehaviour
         float angle = CalculateAngle(transform.position, place);
         transform.rotation = Quaternion.Euler(0, 0, angle);
         */
-        Vector3 spd = (place - transform.position) * bst / 3.5f;
-        float maximum_speed = 3.5f * bst;
-        if(spd.x > maximum_speed)
-        {
-            spd.x = maximum_speed;
-        } else if (spd.x < -maximum_speed)
-        {
-            spd.x = -maximum_speed;
-        }
-        if (spd.y > maximum_speed)
-        {
-            spd.y = maximum_speed;
-        } else if (spd.y < -maximum_speed)
-        {
-            spd.y = -maximum_speed;
-        }
-        particleThing.GetComponent<ParticleSystem>().startSpeed = spd.x * Time.deltaTime;
-        transform.position += spd * Time.deltaTime;
-        Vector3 tmp = transform.position;
+        Vector3 tmp = Vector3.MoveTowards(transform.position, place, speed * Time.deltaTime * bst);
         tmp.z = 0;
+        transform.position = tmp;
+        particleThing.GetComponent<ParticleSystem>().startSpeed = tmp.x * Time.deltaTime;
         bst -= 0.39f * Time.deltaTime;
         if (bst < 1) { 
             bst = 1;
@@ -63,7 +48,6 @@ public class NewBehaviourScript : MonoBehaviour
             invulnarability = 0;
             gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         }
-        transform.position = tmp;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
