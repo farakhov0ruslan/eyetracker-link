@@ -9,8 +9,8 @@ public class start : MonoBehaviour
     {
         star.money = 0;
         star.life = 3;
-        spawner.spawnRate = 2f;
-        spawner.restart = Time.time / spawner.speedUp;
+        spawnerDenis.spawnRate = 2f;
+        spawnerDenis.restart = Time.time / spawnerDenis.speedUp;
 
     }
 
