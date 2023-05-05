@@ -21,7 +21,7 @@ public class FinishScore : MonoBehaviour
         {
             record = star.money;
         }
-        scoreText.text = "You score: " + star.money.ToString();
-        RecordText.text = "Record: " + record.ToString();
+        scoreText.text = "Твой счёт: " + star.money.ToString();
+        RecordText.text = "Рекорд: " + record.ToString();
     }
 }

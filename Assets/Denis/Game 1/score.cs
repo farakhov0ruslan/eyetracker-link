@@ -13,8 +13,8 @@ public class score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + star.money.ToString();
-        lifeText.text = "Life: " + star.life.ToString();
+        scoreText.text = "Счёт: " + star.money.ToString();
+        lifeText.text = "Жизни: " + star.life.ToString();
 
     }
 }

@@ -19,6 +19,6 @@ public class CarScore : MonoBehaviour
 
         score = (int)(Car.rightDrowing * 100f);
         Debug.Log(Car.rightDrowing);
-        textScore.text = "score: " + score.ToString() + "%";
+        textScore.text = "Результат: " + score.ToString() + "%";
     }
 }
