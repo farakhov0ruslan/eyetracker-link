@@ -7,7 +7,6 @@ public class TobiiCursorBehaviour : MonoBehaviour
 {
     [SerializeField] float mass;
     private static Vector3 wp;
-    [SerializeField] float scaleAnim;
 
 
     public static Vector3 world_point
@@ -23,7 +22,7 @@ public class TobiiCursorBehaviour : MonoBehaviour
     public void animateCursor(float time)
     {
         float speed = 1 / time;
-        Animator animator = GetComponentInParent<Animator>();
+        Animator animator = GetComponent<Animator>();
         if (animator.gameObject.activeSelf)
         {
             Debug.Log("Started cursor animation");
@@ -33,7 +32,7 @@ public class TobiiCursorBehaviour : MonoBehaviour
     }
     public void stopAnimateCursor()
     {
-        Animator animator = GetComponentInParent<Animator>();
+        Animator animator = GetComponent<Animator>();
         if (animator.gameObject.activeSelf)
         {
             Debug.Log("Stopped cursor animation");
